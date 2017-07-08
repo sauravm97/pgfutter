@@ -53,7 +53,7 @@ func postgresify(identifier string) string {
 		"-": "_",
 		",": "_",
 		"#": "_",
-		
+
 		"[":  "",
 		"]":  "",
 		"{":  "",
@@ -112,7 +112,7 @@ func createJSONTable(db *sql.DB, schema string, tableName string, column string,
 func createTable(db *sql.DB, schema string, tableName string, columns []string) (*sql.Stmt, error) {
 	columnTypes := make([]string, len(columns))
 	for i, col := range columns {
-		columnTypes[i] = fmt.Sprintf("%s TEXT", col)
+		columnTypes[i] = fmt.Sprintf("\"%s\" TEXT", col)
 	}
 	columnDefinitions := strings.Join(columnTypes, ",")
 	fullyQualifiedTable := fmt.Sprintf("%s.%s", schema, tableName)
